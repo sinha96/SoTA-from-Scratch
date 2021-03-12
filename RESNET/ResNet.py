@@ -92,7 +92,7 @@ def resnet152(in_ch=3, num_classes=1000):
 	return ResNet(ResBlock, [3, 8, 36, 3], in_ch, num_classes)
 
 
-def test():
+def run():
 	net50 = resnet50()
 	net101 = resnet101()
 	net152 = resnet152()
@@ -107,4 +107,4 @@ def test():
 	print(y_152.shape)
 	del y_152
 	
-test()
+run()
