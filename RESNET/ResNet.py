@@ -106,5 +106,7 @@ def run():
 	y_152 = net152(x).to('cuda')
 	print(y_152.shape)
 	del y_152
-	
-run()
+
+
+if __name__ == '__main__':
+	run()
