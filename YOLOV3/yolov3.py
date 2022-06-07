@@ -9,8 +9,12 @@ from tensorflow.keras.layers import UpSampling2D
 from tensorflow.keras.layers import add, concatenate
 from tensorflow.keras.models import Model
 from tensorflow.keras.utils import plot_model
- 
+
+
 def _conv_block(inp, convs, skip=True):
+	"""
+	Build for convolution block of YoloV3 model
+	"""
 	x = inp
 	count = 0
 	for conv in convs:
@@ -27,8 +31,13 @@ def _conv_block(inp, convs, skip=True):
 		if conv['bnorm']: x = BatchNormalization(epsilon=0.001, name='bnorm_' + str(conv['layer_idx']))(x)
 		if conv['leaky']: x = LeakyReLU(alpha=0.1, name='leaky_' + str(conv['layer_idx']))(x)
 	return add([skip_connection, x]) if skip else x
- 
+
+
 def make_yolov3_model():
+	"""
+	Build YoloV3 block
+	:return: YoloV3 Model
+	"""
 	input_image = Input(shape=(None, None, 3))
 	# Layer  0 => 4
 	x = _conv_block(input_image, [{'filter': 32, 'kernel': 3, 'stride': 1, 'bnorm': True, 'leaky': True, 'layer_idx': 0},
@@ -106,6 +115,9 @@ def make_yolov3_model():
 	return model
  
 class WeightReader:
+	"""
+	Build for YOLO network
+	"""
 	def __init__(self, weight_file):
 		with open(weight_file, 'rb') as w_f:
 			major,	= struct.unpack('i', w_f.read(4))

@@ -5,6 +5,9 @@ VGGNET = [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'M', 512, 512, 512, 'M', 51
 
 
 class VGG(nn.Module):
+	"""
+	Builld  for VGG Network
+	"""
 	def __init__(self, in_ch, num_classes):
 		super(VGG, self).__init__()
 		self.in_ch = in_ch

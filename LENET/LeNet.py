@@ -3,6 +3,9 @@ import torch.nn as nn
 
 
 class LeNet(nn.Module):
+	"""
+	Build for LeNet Network
+	"""
 	def __init__(self):
 		super(LeNet, self).__init__()
 		self.conv1 = nn.Conv2d(in_channels=1, out_channels=6, kernel_size=(5, 5), stride=(1, 1), padding=0)

@@ -4,6 +4,9 @@ import torch.nn as nn
 
 
 class GoogLeNet(nn.Module):
+    """
+    Class for Google's version of LeNet network
+    """
     def __init__(self, aux_logits=True, num_classes=1000):
         super(GoogLeNet, self).__init__()
         assert aux_logits == True or aux_logits == False
@@ -91,6 +94,9 @@ class GoogLeNet(nn.Module):
 
 
 class InceptionBlock(nn.Module):
+    """
+    build for inception block
+    """
     def __init__(
         self, in_ch, out_1x1, red_3x3, out_3x3, red_5x5, out_5x5, out_1x1pool
     ):
@@ -119,6 +125,9 @@ class InceptionBlock(nn.Module):
 
 
 class InceptionAux(nn.Module):
+    """
+    Build for Inception Network
+    """
     def __init__(self, in_ch, num_classes):
         super(InceptionAux, self).__init__()
         self.relu = nn.ReLU()

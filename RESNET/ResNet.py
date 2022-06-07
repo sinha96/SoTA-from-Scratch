@@ -3,6 +3,9 @@ import torch.nn as nn
 
 
 class ResBlock(nn.Module):
+	"""
+	Build for Resnet block
+	"""
 	def __init__(self, in_ch, out_ch, identity_down=None, stride=1):
 		super(ResBlock, self).__init__()
 		self.expansion = 4
@@ -34,6 +37,9 @@ class ResBlock(nn.Module):
 
 
 class ResNet(nn.Module):
+	"""
+	build for Residual network Model
+	"""
 	def __init__(self, block, layers, img_ch, num_classes):
 		super(ResNet, self).__init__()
 		self.in_ch = 64
@@ -78,6 +84,8 @@ class ResNet(nn.Module):
 		x = x.reshape(x.shape[0], -1)
 		x = self.fc(x)
 		return x
+
+# Functions for building different version of resnet network
 
 
 def resnet50(in_ch=3, num_classes=1000):

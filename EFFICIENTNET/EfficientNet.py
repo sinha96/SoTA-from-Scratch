@@ -27,6 +27,10 @@ phi_val = {
 
 
 class ConvBlock(nn.Module):
+	"""
+	Block of convolution network of efficient network
+
+	"""
 	def __init__(self, in_ch, out_ch, kernel_size, stride, padding, groups=1):
 		super(ConvBlock, self).__init__()
 		self.conv = nn.Conv2d(
@@ -38,6 +42,11 @@ class ConvBlock(nn.Module):
 		self.silu = nn.SiLU()
 	
 	def forward(self, x):
+		"""
+		Propagating incoming feature in the network
+		:param x: input feature
+		:return: output of the network
+		"""
 		x = self.conv(x)
 		x = self.bn(x)
 		x = self.silu(x)
@@ -46,6 +55,9 @@ class ConvBlock(nn.Module):
 
 
 class SqueezeExcitation(nn.Module):
+	"""
+	Excitation block of Efficient network
+	"""
 	def __init__(self, in_ch, reduce_dim):
 		super(SqueezeExcitation, self).__init__()
 		self.se = nn.Sequential(
@@ -57,11 +69,19 @@ class SqueezeExcitation(nn.Module):
 		)
 	
 	def forward(self, x):
+		"""
+		Propagating incoming feature in the network
+		:param x: incoming feature
+		:return: output of the network
+		"""
 		x *= self.se(x)
 		return x
 
 
 class InvertedResidualBlock(nn.Module):
+	"""
+	Residual Block of the efficient model
+	"""
 	def __init__(self, in_ch, out_ch, kernel_size, stride, padding, expand_ratio, reduction=4, survival_prob=0.8):
 		super(InvertedResidualBlock, self).__init__()
 		self.survival_prob = survival_prob
@@ -101,6 +121,9 @@ class InvertedResidualBlock(nn.Module):
 
 
 class EfficientNet(nn.Module):
+	"""
+	Efficient Network Model
+	"""
 	def __init__(self, version, num_class):
 		super(EfficientNet, self).__init__()
 		width_factor, depth_factor, dropout_rate = self.calculate_factor(version)

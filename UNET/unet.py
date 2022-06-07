@@ -4,6 +4,9 @@ import torchvision.transforms.functional as f
 
 
 class DoubleConv(nn.Module):
+	"""
+	Build for U-net block
+	"""
 	def __init__(self, in_ch, out_ch):
 		super(DoubleConv, self).__init__()
 		self.conv = nn.Sequential(
@@ -21,6 +24,9 @@ class DoubleConv(nn.Module):
 
 
 class UNET(nn.Module):
+	"""
+	Build for U-net Network
+	"""
 	def __init__(self, in_ch, out_ch=1, features=[64, 128, 256, 512]):
 		super(UNET, self).__init__()
 		self.downs = nn.ModuleList()
